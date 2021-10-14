@@ -2,11 +2,19 @@ from django.db import models
 
 
 class Books(models.Model):
-
-    title = models.CharField()
-    authors = models.CharField()
-    published_date = models.CharField()
-    categories = models.CharField()
+    id = models.CharField(primary_key=True, max_length=256)
+    title = models.CharField(max_length=256)
+    published_date = models.CharField(max_length=128)
     average_rating = models.IntegerField()
     ratings_count = models.IntegerField()
     thumbnail = models.URLField()
+
+
+class Categories(models.Model):
+    name = models.CharField(null=True, blank=True, max_length=256)
+    books = models.ManyToManyField(Books)
+
+
+class Authors(models.Model):
+    name = models.CharField(null=True, blank=True, max_length=256)
+    books = models.ManyToManyField(Books)
