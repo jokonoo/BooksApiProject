@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for item in objects %}
+    <h1>ID:{{item.id}}</h1>
+    <h1>TITLE:{{item.title}}</h1>
+    <h1>PUBLISHED DATE:{{item.published_date}}</h1>
+    <h1>AVERAGE RATING:{{item.average_rating}}</h1>
+    <h1>RATINGS COUNT:{{item.ratings_count}}</h1>
+    <h1>THMBNAIL: {{item.thumbnail}}</h1>
+    <h1>CATEGORIES: {{item.categories_set.all}}</h1>
+    <h1>AUTHORS :{{item.authors_set.all}}</h1>
+{% endfor %}
+
+</body>
+</html>
