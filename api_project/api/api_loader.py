@@ -14,8 +14,10 @@ def api_loading(request, param):
                                          'title': item_data.get("title"),
                                          'published_date': item_data.get("publishedDate"),
                                          'average_rating': item_data.get("averageRating"),
-                                         'ratings_count': item_data.get("ratingsCount"),
-                                         'thumbnail': item_data.get("thumbnail")})
+                                         'ratings_count': item_data.get("ratingsCount")})
+        if thumbnail := item_data.get("imageLinks"):
+            obj.thumbnail = thumbnail.get("thumbnail")
+            obj.save()
         if author_list := item.get("volumeInfo").get("authors"):
             for author in author_list:
                 auth, created = Author.objects.get_or_create(name=author)
@@ -25,6 +27,7 @@ def api_loading(request, param):
                 cat, created = Category.objects.get_or_create(name=category)
                 obj.categories.add(cat)
     return render(request, 'api/test.html', context={'objects': Book.objects.all()})
+
 
 def test(request):
     return render(request, 'api/author_test.html', context={'authors': Author.objects.all()})
