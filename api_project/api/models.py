@@ -8,6 +8,8 @@ class Book(models.Model):
     average_rating = models.IntegerField(blank=True, null=True, default=None)
     ratings_count = models.IntegerField(blank=True, null=True, default=None)
     thumbnail = models.URLField(verbose_name="thumbnail url", null=True, blank=True, default=None)
+    #authors = models.ManyToManyField(Author, related_name='books')
+    #categories = models.ManyToManyField(Category, related_name='books')
 
     class Meta:
         ordering = ['title']
