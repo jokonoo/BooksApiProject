@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from django_filters import rest_framework as filters
+from django.db.models import Q
 
 from .models import Book
 from .serializers import BooksSerializer
@@ -15,7 +16,17 @@ class BooksView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if sorting := self.request.query_params.get('sort'):
+        params = self.request.query_params
+        if authors := params.getlist('author'):
+            if len(authors) >= 2:
+                q = Q()
+                for author in authors:
+                    q |= Q(authors__name__icontains=author)
+                if sorting := params.get('sort'):
+                    return queryset.filter(q).order_by(sorting)
+            else:
+                queryset = queryset.filter(authors__name__icontains=authors[0])
+        if sorting := params.get('sort'):
             queryset = queryset.order_by(sorting)
         return queryset
 
