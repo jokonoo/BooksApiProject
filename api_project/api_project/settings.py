@@ -1,4 +1,4 @@
-import os, json
+import json
 from pathlib import Path
 
 with open('api_project/config.json') as config:

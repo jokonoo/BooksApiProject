@@ -1,12 +1,14 @@
 import requests
-from .models import Book, Category, Author
-from django.shortcuts import render, redirect, reverse
+
+from django.shortcuts import reverse
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 
+from .models import Book, Category, Author
+
+
 @csrf_exempt
 def api_loading(request):
-
     if request.method == "POST":
         url = 'https://www.googleapis.com/books/v1/volumes'
         data = {'q': request.GET.get('q', '')}
@@ -30,11 +32,4 @@ def api_loading(request):
                 for category in category_list:
                     cat, created = Category.objects.get_or_create(name=category)
                     obj.categories.add(cat)
-        #return render(request, 'api/test.html', context={'objects': Book.objects.all()})
-        return HttpResponseRedirect(reverse('api_view'))
-    #return render(request, 'api/test.html', context={'objects': Book.objects.all()})
     return HttpResponseRedirect(reverse('api_view'))
-
-
-def test(request):
-    return render(request, 'api/author_test.html', context={'authors': Author.objects.all()})
