@@ -11,7 +11,7 @@ from .models import Book, Category, Author
 def api_loading(request):
     if request.method == "POST":
         url = 'https://www.googleapis.com/books/v1/volumes'
-        data = {'q': request.GET.get('q', '')}
+        data = {'q': request.GET.get('q', '').replace('"', '')}
         r = requests.get(url, data).json()
         for item in r.get("items"):
             item_data = item.get("volumeInfo")

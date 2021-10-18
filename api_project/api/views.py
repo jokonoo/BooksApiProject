@@ -20,6 +20,7 @@ class BooksView(generics.ListAPIView):
             if len(authors) >= 2:
                 q = Q()
                 for author in authors:
+                    author = author.replace('"', '')
                     q |= Q(authors__name__icontains=author)
                 queryset = queryset.filter(q)
                 if sorting := params.get('sort'):
