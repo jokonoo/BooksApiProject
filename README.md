@@ -21,7 +21,7 @@ interests You.
 This method is showing only one record if it matches unique id that exists in database.
 Just enter the id in place of BookUniqueID.
 
-#### POST db
+#### POST /db
 
 Use this method to post data to database. You have to give one param at the time which is q=value.
 This method is basically scraping data from certain google api that contains information about books.
