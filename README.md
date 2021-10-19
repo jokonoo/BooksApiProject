@@ -6,15 +6,20 @@
 
 #### GET /books
 
-This method is showing you all the records that exists in database
+This method is showing you all the records that exists in database.
 You can params like author=value to filter scores showing only authors with names that match the value.
+
 You can also use it like chain ?author=name1&author=name2, and it basically shows records for both values.
-Also You can sort by published_date using query param sort=-published_date
+
+Also, You can sort by published_date values using query param sort=-published_date, or if You are interested
+in some specific year, You can type in (as query param) published_date=year, where year is obviously certain value that
+interests You.
 
 
-#### GET/books/<BookUniqueID>
+#### GET/books/BookUniqueID
 
-This method is showing only one record if it matches unique id that exists in database
+This method is showing only one record if it matches unique id that exists in database.
+Just enter the id in place of BookUniqueID.
 
 #### POST db
 
